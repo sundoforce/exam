@@ -1,68 +1,75 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function MultipleChoiceQuestion(props) {
+const QuizScreen = () => {
+    const [quiz, setQuiz] = useState(null);
+
+    useEffect(() => {
+        const fetchQuiz = async () => {
+            try {
+                const response = await axios.get('https://cbt-api.sdk.xyz/api/quiz/randoms/1/2');
+                setQuiz(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchQuiz();
+    }, []);
+
+    if (!quiz) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div>
-            <p>{props.prompt}</p>
-            <form>
-                {props.choices.map(choice => (
-                    <div key={choice}>
-                        <input type="radio" name={props.name} value={choice} />
-                        {choice}
-                    </div>
-                ))}
-            </form>
+            <h1>Quiz</h1>
+            {quiz.map((q, index) => (
+                <div key={index}>
+                    <h2>{q.title}</h2>
+                    {q.passage_a && (
+                        <div>
+                            <input type="radio" name="passage" value={q.passage_a} />
+                            <label>{q.passage_a}</label>
+                        </div>
+                    )}
+                    {q.passage_b && (
+                        <div>
+                            <input type="radio" name="passage" value={q.passage_b} />
+                            <label>{q.passage_b}</label>
+                        </div>
+                    )}
+                    {q.passage_c && (
+                        <div>
+                            <input type="radio" name="passage" value={q.passage_c} />
+                            <label>{q.passage_c}</label>
+                        </div>
+                    )}
+                    {q.passage_d && (
+                        <div>
+                            <input type="radio" name="passage" value={q.passage_d} />
+                            <label>{q.passage_d}</label>
+                        </div>
+                    )}
+                    {q.passage_e && (
+                        <div>
+                            <input type="radio" name="passage" value={q.passage_e} />
+                            <label>{q.passage_e}</label>
+                        </div>
+                    )}
+                    {q.passage_f && (
+                        <div>
+                            <input type="radio" name="passage" value={q.passage_f} />
+                            <label>{q.passage_f}</label>
+                        </div>
+                    )}
+                    <p>Correct answer: {q.answer}</p>
+                    <p>Answer choices: {q.answer_candidates}</p>
+                    <p>{q.description}</p>
+                </div>
+            ))}
         </div>
     );
-}
-
-const test = {
-    questions: [
-        {
-            type: 'multiple choice',
-            prompt: 'You support a Node.js application running on Google Kubernetes Engine (GKE) in production. The application makes several HTTP requests to dependent applications. You want to anticipate which dependent applications might cause performance issues. What should you do?',
-            name: 'capital',
-            choices: ['Instrument all applications with Stackdriver Profiler.',
-                'Instrument all applications with Stackdriver Trace and review inter-service HTTP requests.',
-                'Use Stackdriver Logging to find dependent applications that are performing poorly.',
-                'Modify the Node.js application to log HTTP request and response times to dependent applications.'
-            ]
-        }
-    ]
 };
 
-function Test(props) {
-    return (
-        <form onSubmit={props.onSubmit}>
-            {props.test.questions.map(question => {
-                if (question.type === 'multiple choice') {
-                    return (
-                        <MultipleChoiceQuestion
-                            key={question.name}
-                            name={question.name}
-                            prompt={question.prompt}
-                            choices={question.choices}
-                        />
-                    );
-                } else {
-                    return null;
-                }
-            })}
-            <button type="submit">Submit</button>
-        </form>
-    );
-}
-
-function App() {
-    const handleSubmit = event => {
-        event.preventDefault();
-        // 제출 처리 코드
-    };
-
-    return <Test onSubmit={handleSubmit} test={test} />;
-}
-
-ReactDOM.render(<App />, document.getElementById('root'));
-
-export default App;
+export default QuizScreen;
