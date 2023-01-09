@@ -12,7 +12,7 @@ function App() {
     return (
         <BrowserRouter>
             <Helmet>
-                <title>CBT-Computer Base Test</title>
+                <title>CBT :: computer-based training :: </title>
             </Helmet>
             <div>
                 <Routes>
