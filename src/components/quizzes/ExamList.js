@@ -8,7 +8,7 @@ function Quiz() {
     // Use the useEffect hook to retrieve the quiz data from the API when the component mounts
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch('https://cbt-api.sdk.xyz/api/quiz/randoms/1/10');
+            const response = await fetch('https://cbt-api.sdk.xyz/api/quiz/randoms/1/200');
             const data = await response.json();
             setQuizData(data);
         }
