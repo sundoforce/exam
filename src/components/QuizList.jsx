@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Header from "../common/Header";
 
 const QuizList = () => {
     const [quizData, setQuizData] = useState([]);
@@ -14,7 +15,9 @@ const QuizList = () => {
     }, []);
 
     return (
+
         <div>
+            <Header/>
             {quizData.map(quiz => (
                 <div key={quiz.id}>
                     <Link to={`/test`}>

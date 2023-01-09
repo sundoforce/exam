@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import Header from "../common/Header";
 
 const Quiz2 = ({ quiz }) => {
     const [selectedOption, setSelectedOption] = useState('');
@@ -18,6 +19,7 @@ const Quiz2 = ({ quiz }) => {
 
     return (
         <form>
+            <Header/>
             <h2>{quiz.title}</h2>
             {quiz.map((q, index) => (
                 <div key={index}>

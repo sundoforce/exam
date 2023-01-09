@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Header from "../common/Header";
 
 const Quiz = () => {
     const [quizData, setQuizData] = useState({});
@@ -14,6 +15,7 @@ const Quiz = () => {
 
     return (
         <div>
+            <Header/>
             <h1>{quizData.title}</h1>
             {quizData.questions && quizData.questions.map(question => (
                 <div key={question.id}>

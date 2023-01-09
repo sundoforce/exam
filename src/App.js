@@ -4,10 +4,16 @@ import QuizList from './components/QuizList';
 import Quiz from './components/Quiz';
 import Quiz2 from './components/Test2';
 import Test from './components/Test';
+import {Helmet} from "react-helmet";
+// import Header from "./common/Header";
 
 function App() {
     return (
+
         <BrowserRouter>
+            <Helmet>
+                <title>CBT-Computer Base Test</title>
+            </Helmet>
             <div>
                 <Routes>
                     <Route path="/" element={<QuizList />} />

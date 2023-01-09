@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Header from "../common/Header";
 
 function TestPage() {
     const [questions, setQuestions] = useState([]);
@@ -23,6 +24,7 @@ function TestPage() {
     // Render the test questions
     return (
         <div>
+            <Header/>
             {questions.map(question => (
                 <div key={question.title}>
                     <p>{question.title}</p>
