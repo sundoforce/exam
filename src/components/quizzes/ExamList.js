@@ -48,7 +48,7 @@ function Quiz() {
                         {question.passage_d && <p><input type="radio" name={question.id} value="D" checked={answers[question.id] === 'D'} onChange={handleChange} /> D. {question.passage_d}</p>}
                         {question.passage_e && <p><input type="radio" name={question.id} value="E" checked={answers[question.id] === 'E'} onChange={handleChange} /> E. {question.passage_e}</p>}
                         {question.passage_f && <p><input type="radio" name={question.id} value="F" checked={answers[question.id] === 'F'} onChange={handleChange} /> F. {question.passage_f}</p>}
-                        <button type="button" onClick={() => handleShowAnswer(question.id, question.answer)}>Show answer</button>
+                        <button type="button" onClick={() => handleShowAnswer(question.id, question.answer)}>Show answer</button><br/>
                         {page > 1 && <button type="button" onClick={handlePrevious}>Previous</button>}
                         {page < numPages && <button type="button" onClick={handleNext}>Next</button>}
                     </div>
