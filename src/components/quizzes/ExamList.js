@@ -4,6 +4,8 @@ function Quiz() {
     // Declare state variables to store the quiz data and the user's selected answers
     const [quizData, setQuizData] = useState(null);
     const [answers, setAnswers] = useState({});
+    const [page, setPage] = useState(1);
+
 
     // Use the useEffect hook to retrieve the quiz data from the API when the component mounts
     useEffect(() => {
@@ -20,10 +22,23 @@ function Quiz() {
         return <p>Loading quiz...</p>;
     }
 
+    // Calculate the number of pages based on the number of questions
+    const numPages = Math.ceil(quizData.length / 1);
+
+    // Function to handle the "Previous" button click
+    function handlePrevious() {
+        setPage((prevPage) => prevPage - 1);
+    }
+
+    // Function to handle the "Next" button click
+    function handleNext() {
+        setPage((prevPage) => prevPage + 1);
+    }
     // Render the quiz questions
     return (
         <form>
-            {quizData.map((question) => {
+            {/*{quizData.slice((page - 1) * 10, page * 10).map((question) => {*/}
+            {quizData.slice((page - 1), page).map((question) => {
                 return (
                     <div key={question.id}>
                         <h3>{question.title}</h3>
@@ -34,6 +49,8 @@ function Quiz() {
                         {question.passage_e && <p><input type="radio" name={question.id} value="E" checked={answers[question.id] === 'E'} onChange={handleChange} /> E. {question.passage_e}</p>}
                         {question.passage_f && <p><input type="radio" name={question.id} value="F" checked={answers[question.id] === 'F'} onChange={handleChange} /> F. {question.passage_f}</p>}
                         <button type="button" onClick={() => handleShowAnswer(question.id, question.answer)}>Show answer</button>
+                        {page > 1 && <button type="button" onClick={handlePrevious}>Previous</button>}
+                        {page < numPages && <button type="button" onClick={handleNext}>Next</button>}
                     </div>
                 );
             })}
