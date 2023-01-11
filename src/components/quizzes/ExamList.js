@@ -41,13 +41,14 @@ function Quiz() {
             {quizData.slice((page - 1), page).map((question) => {
                 return (
                     <div key={question.id}>
-                        <h3>{question.title}</h3>
+                        <h3>{page}. {question.title}</h3>
                         {question.passage_a && <p><input type="radio" name={question.id} value="A" checked={answers[question.id] === 'A'} onChange={handleChange} /> A. {question.passage_a}</p>}
                         {question.passage_b && <p><input type="radio" name={question.id} value="B" checked={answers[question.id] === 'B'} onChange={handleChange} /> B. {question.passage_b}</p>}
                         {question.passage_c && <p><input type="radio" name={question.id} value="C" checked={answers[question.id] === 'C'} onChange={handleChange} /> C. {question.passage_c}</p>}
                         {question.passage_d && <p><input type="radio" name={question.id} value="D" checked={answers[question.id] === 'D'} onChange={handleChange} /> D. {question.passage_d}</p>}
                         {question.passage_e && <p><input type="radio" name={question.id} value="E" checked={answers[question.id] === 'E'} onChange={handleChange} /> E. {question.passage_e}</p>}
                         {question.passage_f && <p><input type="radio" name={question.id} value="F" checked={answers[question.id] === 'F'} onChange={handleChange} /> F. {question.passage_f}</p>}
+                        {question.description && <p> {question.description}</p>}
                         <button type="button" onClick={() => handleShowAnswer(question.id, question.answer)}>Show answer</button><br/>
                         {page > 1 && <button type="button" onClick={handlePrevious}>Previous</button>}
                         {page < numPages && <button type="button" onClick={handleNext}>Next</button>}
