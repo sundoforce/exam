@@ -10,7 +10,7 @@ interface DisqusProps {
 }
 
 const Disqus: React.FC<DisqusProps> = ({ identifier, title }) => {
-    identifier = window.location.pathname + "_" + identifier;
+    identifier = window.location.pathname + "_" + identifier + "_disqus";
     identifier = identifier.split('-').join('_').trim().replace('/','');
     console.log(identifier)
     const [config, setConfig] = React.useState({
