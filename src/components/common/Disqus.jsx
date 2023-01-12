@@ -1,49 +1,36 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
-
+import { useEffect, useState } from 'react'
 import { DiscussionEmbed } from 'disqus-react'
-import { useEffect } from 'react';
-
 
 interface DisqusProps {
     identifier: string;
     title: string;
 }
 
-// const Disqus: React.FC<DisqusProps> = ({ identifier, title}) => {
-const Disqus = ({identifier, title}) => {
-    const env = window.location.href.includes('localhost') ? 'dev' : 'prod'
-    identifier = window.location.pathname.replace('/','') + "_" + identifier + `_${env}`;
-    console.log(identifier)
-    console.log(window.location.href)
-    const [config, setConfig] = React.useState({
-        // url: window.location.href,
-        url: "https://cbt.sdk.xyz",
-        identifier : identifier,
-        title: identifier + title,
+const Disqus = ({identifier, title}: DisqusProps) => {
+    const [config, setConfig] = useState({
+        url: window.location.href,
+        identifier: `${identifier}_${process.env.NODE_ENV}`,
+        title: title,
         language: 'ko',
     });
 
-    // useEffect(() => {
-    //     setConfig((config) => ({
-    //         ...config,
-    //         identifier,
-    //     }));
-    //
-    // }, [identifier]);
+    useEffect(() => {
+        setConfig((prevConfig) => ({
+            ...prevConfig,
+            identifier: `${identifier}_${process.env.NODE_ENV}`,
+            title: title,
+        }));
+    }, [identifier, title]);
 
     return (
-        <div key={identifier}>
-                <DiscussionEmbed
-                    shortname='cbt-sdk-xyz'
-                    config={config}
-                />
+        <div>
+            <DiscussionEmbed
+                shortname='cbt-sdk-xyz'
+                config={config}
+            />
         </div>
     )
 }
 
-Disqus.propTypes = {
-    article: PropTypes.object,
-    url: PropTypes.string,
-}
 export default Disqus;
