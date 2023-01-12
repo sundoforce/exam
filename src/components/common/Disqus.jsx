@@ -16,7 +16,7 @@ const Disqus: React.FC<DisqusProps> = ({ identifier, title}) => {
     const [config, setConfig] = React.useState({
         url: window.location.href,
         identifier : identifier,
-        title,
+        // title,
         language: 'ko',
     });
 
@@ -25,16 +25,15 @@ const Disqus: React.FC<DisqusProps> = ({ identifier, title}) => {
             ...config,
             identifier,
         }));
+
     }, [identifier]);
 
     return (
-        <div key={`disqus-container-${identifier}`}>
-            <article className='prose prose-zinc mx-auto min-h-screen max-w-4xl pt-24 dark:prose-invert lg:prose-lg'>
+        <div key={`disqus-container-${window.location.href}-${identifier}`}>
                 <DiscussionEmbed
                     shortname='cbt-sdk-xyz'
                     config={config}
                 />
-            </article>
         </div>
     )
 }
