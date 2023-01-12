@@ -11,11 +11,12 @@ interface DisqusProps {
 
 const Disqus: React.FC<DisqusProps> = ({ identifier, title }) => {
     identifier = window.location.pathname + "_" + identifier;
+    identifier = identifier.split('-').join('_').trim()
     console.log(identifier)
     const [config, setConfig] = React.useState({
         url: "https://cbt.sdk.xyz/",
         // url: window.location.href,
-        identifier : identifier.split('-').join('_').trim(),
+        identifier : identifier,
         // identifier : window.location.href + "_" + identifier.split('-').join('_'),
         title,
         language: 'ko',
