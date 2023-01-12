@@ -1,7 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import Disqus from "../common/Disqus";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+
 
 const Quiz = (props) => {
+
     // Declare state variables to store the quiz data and the user's selected answers
     const [quizData, setQuizData] = useState(null);
     const [answers, setAnswers] = useState({});
@@ -26,6 +30,25 @@ const Quiz = (props) => {
 
         fetchData();
     }, [start, end]);
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'ArrowRight') {
+            handleNext();
+        } else if (event.key === 'ArrowLeft') {
+            handlePrevious();
+        } else if (event.key === 'Enter') {
+            // handleShowAnswer(question.id, question.answer);
+        }
+    };
+
+// ...
+
+    useEffect(() => {
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
 
     // Render the quiz if the data has been retrieved, otherwise display a loading message
     if (!quizData) {
@@ -86,8 +109,11 @@ const Quiz = (props) => {
                             <p><input type="radio" name={question.id} value="F" checked={answers[question.id] === 'F'}
                                       onChange={handleChange}/> F. {question.passage_f}</p>}
                         {question.description && <p> {question.description}</p>}
+                        {question.answer.length > 2 && <p> {question.answer}</p>}
                         {page > 1 && <button type="button" onClick={handlePrevious}>Previous</button>}
-                        <button type="button" onClick={() => handleShowAnswer(question.id, question.answer)}>Show answer</button>                        {page < numPages && <button type="button" onClick={handleNext}>Next</button>}
+                        <button type="button" onClick={() => handleShowAnswer(question.id, question.answer)}>Show answer</button>
+                        {page < numPages &&
+                            <button type="button" onClick={handleNext}><FontAwesomeIcon icon={faArrowRight} />Next</button>}
                         <Disqus identifier={question.id} title={question.title}/>
                     </div>
                 );
