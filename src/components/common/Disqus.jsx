@@ -29,14 +29,14 @@ const Disqus: React.FC<DisqusProps> = ({ identifier, title }) => {
     }, [identifier]);
 
     return (
-        <>
+        <div key={`disqus-container-${identifier}`}>
             <article className='prose prose-zinc mx-auto min-h-screen max-w-4xl pt-24 dark:prose-invert lg:prose-lg'>
                 <DiscussionEmbed
                     shortname='cbt-sdk-xyz'
                     config={config}
                 />
             </article>
-        </>
+        </div>
     )
 }
 
