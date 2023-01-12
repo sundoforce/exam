@@ -3,7 +3,12 @@ import * as React from 'react'
 import { DiscussionEmbed } from 'disqus-react'
 
 
-const Disqus = () => {
+interface DisqusProps {
+    identifier: string;
+    title: string;
+}
+
+const Disqus: React.FC<DisqusProps> = ({ identifier, title }) => {
 
 
     return (
@@ -13,8 +18,8 @@ const Disqus = () => {
                     shortname='cbt-sdk-xyz'
                     config={{
                         url: 'https://cbt.sdk.xyz',
-                        identifier: `data.mdxPage.slug`,
-                        title: `data.mdxPage.title`,
+                        identifier,
+                        title,
                         language: 'ko',
                     }}
                 />
