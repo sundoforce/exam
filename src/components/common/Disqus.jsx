@@ -13,8 +13,10 @@ const Disqus: React.FC<DisqusProps> = ({ identifier, title}) => {
     const env = window.location.href.includes('localhost') ? 'dev' : 'prod'
     identifier = window.location.pathname.replace('/','') + "_" + identifier + `_${env}`;
     console.log(identifier)
+    console.log(window.location.href)
     const [config, setConfig] = React.useState({
-        url: window.location.href,
+        // url: window.location.href,
+        url: "https://cbt.sdk.xyz",
         identifier : identifier,
         title,
         language: 'ko',
