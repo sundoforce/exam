@@ -7,6 +7,7 @@ import Quiz2 from './pages/ExamQuestion';
 import Test from './components/Test';
 import {Helmet} from "react-helmet";
 import ExamUpload from "./pages/ExamUpload";
+import ExamIndex from "./pages/ExamIndex";
 // import Header from "./common/Header";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/devops" element={<Quiz2 />} />
                     <Route path="/test" element={<Test />} />
                     <Route path="/load" element={<ExamUpload />} />
+                    <Route path="/exam/index" element={<ExamIndex />} />
                 </Routes>
             </div>
         </BrowserRouter>

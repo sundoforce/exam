@@ -20,7 +20,7 @@ const QuizList = () => {
             <Header/>
             {quizData.map(quiz => (
                 <div key={quiz.id}>
-                    <Link to={`/devops`}>
+                    <Link to={`/exam/index`}>
                         <h2>{quiz.title}</h2>
                     </Link>
                     <p>{quiz.description}</p>
