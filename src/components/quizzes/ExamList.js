@@ -67,12 +67,8 @@ const Quiz = (props) => {
                             <p><input type="radio" name={question.id} value="F" checked={answers[question.id] === 'F'}
                                       onChange={handleChange}/> F. {question.passage_f}</p>}
                         {question.description && <p> {question.description}</p>}
-                        <button type="button" onClick={() => handleShowAnswer(question.id, question.answer)}>Show
-                            answer
-                        </button>
-                        <br/>
                         {page > 1 && <button type="button" onClick={handlePrevious}>Previous</button>}
-                        {page < numPages && <button type="button" onClick={handleNext}>Next</button>}
+                        <button type="button" onClick={() => handleShowAnswer(question.id, question.answer)}>Show answer</button>                        {page < numPages && <button type="button" onClick={handleNext}>Next</button>}
                         <Disqus identifier={question.id} title={question.title}/>
                     </div>
                 );
