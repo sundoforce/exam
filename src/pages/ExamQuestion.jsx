@@ -9,7 +9,7 @@ const QuizListPage = () => {
             {/*<HeaderContainer />*/}
             <Header/>
             <QuizListContainer />
-            <Disqus/>
+            {/*<Disqus/>*/}
             {/*<PaginationContainer />*/}
         </>
     );
