@@ -54,7 +54,7 @@ function Quiz() {
                         <button type="button" onClick={() => handleShowAnswer(question.id, question.answer)}>Show answer</button><br/>
                         {page > 1 && <button type="button" onClick={handlePrevious}>Previous</button>}
                         {page < numPages && <button type="button" onClick={handleNext}>Next</button>}
-                        <Disqus identifier={question.id} title={question.id} />
+                        <Disqus identifier={question.id} title={question.title} />
                     </div>
                 );
             })}

@@ -10,9 +10,11 @@ interface DisqusProps {
 }
 
 const Disqus: React.FC<DisqusProps> = ({ identifier, title }) => {
+    identifier = window.location.pathname + "_" + identifier;
+    console.log(identifier)
     const [config, setConfig] = React.useState({
         url: window.location.href,
-        identifier,
+        identifier : window.location.href + "_" + identifier,
         title,
         language: 'ko',
     });
