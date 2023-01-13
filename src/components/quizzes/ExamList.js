@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Disqus from "../common/Disqus";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import Question from "../question/Question";
 
 
 const Quiz = (props) => {
@@ -34,10 +35,10 @@ const Quiz = (props) => {
     const handleKeyDown = (event) => {
         if (event.key === 'ArrowRight') {
             handleNext();
-        } else if (event.key === 'ArrowLeft') {
+        } else if (event.key === 'ArrowLeft' ) {
             handlePrevious();
         } else if (event.key === 'Enter') {
-            // handleShowAnswer(question.id, question.answer);
+            handleShowAnswer();
         }
     };
 
@@ -81,44 +82,16 @@ const Quiz = (props) => {
     function handleSubmit() {
         setIsQuizFinished(true);
     }
-
     // Render the quiz questions
     return (
         <form>
             {quizData.slice((page - 1), page).map((question) => {
-                return (
-                    <div key={question.id}>
-                        <h3>{page}. {question.title}</h3>
-                        <p>real question number: {question.id}</p>
-                        {question.passage_a &&
-                            <p><input type="radio" name={question.id} value="A" checked={answers[question.id] === 'A'}
-                                      onChange={handleChange}/> A. {question.passage_a}</p>}
-                        {question.passage_b &&
-                            <p><input type="radio" name={question.id} value="B" checked={answers[question.id] === 'B'}
-                                      onChange={handleChange}/> B. {question.passage_b}</p>}
-                        {question.passage_c &&
-                            <p><input type="radio" name={question.id} value="C" checked={answers[question.id] === 'C'}
-                                      onChange={handleChange}/> C. {question.passage_c}</p>}
-                        {question.passage_d &&
-                            <p><input type="radio" name={question.id} value="D" checked={answers[question.id] === 'D'}
-                                      onChange={handleChange}/> D. {question.passage_d}</p>}
-                        {question.passage_e &&
-                            <p><input type="radio" name={question.id} value="E" checked={answers[question.id] === 'E'}
-                                      onChange={handleChange}/> E. {question.passage_e}</p>}
-                        {question.passage_f &&
-                            <p><input type="radio" name={question.id} value="F" checked={answers[question.id] === 'F'}
-                                      onChange={handleChange}/> F. {question.passage_f}</p>}
-                        {question.description && <p> {question.description}</p>}
-                        {question.answer.length > 2 && <p> {question.answer}</p>}
-                        {page > 1 && <button type="button" onClick={handlePrevious}>Previous</button>}
-                        <button type="button" onClick={() => handleShowAnswer(question.id, question.answer)}>Show answer</button>
-                        {page < numPages &&
-                            <button type="button" onClick={handleNext}><FontAwesomeIcon icon={faArrowRight} />Next</button>}
-                        <Disqus identifier={question.id} title={question.title}/>
-                    </div>
-                );
+                return <Question question={question} handleChange={handleChange} handleShowAnswer={handleShowAnswer} handleSubmit={handleSubmit} answers={answers} showAnswer={showAnswer} />
             })}
-            <button type="submit">Check answers</button>
+            {page > 1 && <button type="button" onClick={handlePrevious}>Previous</button>}
+            {page < numPages && <button type="button" onClick={handleNext}>Next</button>}
+            {/*<button type="submit">Check answers</button>*/}
+
         </form>
     );
 
