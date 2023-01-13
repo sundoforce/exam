@@ -9,7 +9,7 @@ const UtterancesComments = () => {
         const config = {
             src: 'https://utteranc.es/client.js',
             repo: 'sundoforce/cbt',
-            'issue-term': 'pathname',
+            'issue-term': 'og:title',
             theme: 'github-light',
             crossOrigin: 'anonymous',
             defer: true
