@@ -1,8 +1,9 @@
 import React from 'react';
-import HeaderContainer from '../containers/common/HeaderContainer';
 import QuizListContainer from '../containers/quizzes/QuizListContainer';
-import PaginationContainer from '../containers/quizzes/PaginationContainer';
 import Header from "../common/Header";
+import UtterancesComments from "../components/common/Utterance";
+import PaginatedQuiz from "../components/quizzes/PaginatedQuiz";
+
 
 const QuizListPage = () => {
     return (
@@ -10,6 +11,9 @@ const QuizListPage = () => {
             {/*<HeaderContainer />*/}
             <Header/>
             <QuizListContainer />
+            <PaginatedQuiz/>
+            <UtterancesComments />
+
             {/*<PaginationContainer />*/}
         </>
     );

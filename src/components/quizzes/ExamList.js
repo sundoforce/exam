@@ -120,7 +120,6 @@ const Quiz = (props) => {
             })}
             {page > 1 && <button type="button" onClick={handlePrevious}>Previous</button>}
             {page < numPages && <button type="button" onClick={handleNext}>Next</button>}
-            <UtterancesComments />
 
 
             {/*<button type="submit">Check answers</button>*/}
