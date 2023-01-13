@@ -20,6 +20,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<QuizList />} />
                     <Route path="/quiz" element={<Test />} />
+                    {/*<Route path="/devops/:start/:end" component={Quiz} />*/}
                     <Route path="/quiz1" element={<Quiz />} />
                     <Route path="/quizzes" element={<QuizListPage />} />
                     <Route path="/devops" element={<Quiz2 />} />

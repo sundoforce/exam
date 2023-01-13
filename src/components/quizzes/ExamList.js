@@ -1,23 +1,29 @@
 import React, {useState, useEffect} from 'react';
-import Disqus from "../common/Disqus";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faArrowRight} from '@fortawesome/free-solid-svg-icons'
 import Question from "../question/Question";
+import { useLocation } from 'react-router-dom';
 
 
 const Quiz = (props) => {
 
     // Declare state variables to store the quiz data and the user's selected answers
-    const [quizData, setQuizData] = useState(null);
+    const location = useLocation();
+
+    const [start, setStart] = useState(1);
+    const [end, setEnd] = useState(100);    const [quizData, setQuizData] = useState(null);
     const [answers, setAnswers] = useState({});
     const [page, setPage] = useState(1);
-    const [start, SetStart] = useState(props.state?.start || 1);
-    const [end, SetEnd] = useState(props.end?.end || 200);
     const [showAnswer, setShowAnswer] = useState({});
     const [isQuizFinished, setIsQuizFinished] = useState(false);
 
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        setStart(parseInt(params.get('start'), 10) || 1);
+        setEnd(parseInt(params.get('end'), 10) || 1);
+    }, [location.search]);
+
     // Use the useEffect hook to retrieve the quiz data from the API when the component mounts
     useEffect(() => {
+    console.log(start, end)
         async function fetchData() {
             try {
                 const response = await fetch(`https://cbt-api.sdk.xyz/api/quiz/randoms/${start}/${end}`);
@@ -31,6 +37,12 @@ const Quiz = (props) => {
 
         fetchData();
     }, [start, end]);
+
+    // useEffect(() => {
+    //     const queryParams = new URLSearchParams(props.location.search);
+    //     setStart(queryParams.get('start') || 1);
+    //     setEnd(queryParams.get('end') || 10);
+    // }, [props.location.search]);
 
     const handleKeyDown = (event) => {
         if (event.key === 'ArrowRight') {
