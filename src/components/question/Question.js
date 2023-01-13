@@ -3,10 +3,11 @@ import React from 'react';
 const Question = (props) => {
 
 
-    const {question, handleChange, handleShowAnswer, handleSubmit, answers, showAnswer } = props;
+    const {question, handleChange, handleShowAnswer, answers,  page , handleNext,handlePrevious } = props;
+
     return (
         <div  key={question.id}>
-            <h3>{question.title}</h3>
+            <h3>{page}. {question.title}</h3>
             <p>real question number: {question.id}</p>
             {question.passage_a &&
                 <p><input type="radio" name={question.id} value="A" checked={answers[question.id] === 'A'}
@@ -29,7 +30,6 @@ const Question = (props) => {
             {question.description && <p> {question.description}</p>}
             {question.answer.length > 2 && <p> {question.answer}</p>}
             <button type="button" onClick={() => handleShowAnswer(question.id, question.answer)}>Show answer</button>
-
         </div>
     );
 };

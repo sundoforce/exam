@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Disqus from "../common/Disqus";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faArrowRight} from '@fortawesome/free-solid-svg-icons'
 import Question from "../question/Question";
 
 
@@ -35,13 +35,27 @@ const Quiz = (props) => {
     const handleKeyDown = (event) => {
         if (event.key === 'ArrowRight') {
             handleNext();
-        } else if (event.key === 'ArrowLeft' ) {
+        } else if (event.key === 'ArrowLeft') {
             handlePrevious();
-        } else if (event.key === 'Enter') {
-            handleShowAnswer();
+        } else if (event.key === ' ' || event.key === 'Spacebar') {
+            const { question } = props;
+            if (question && question.answer) {
+                question.answer.split('').forEach((answer) => {
+                    document.querySelector(`input[name="${question.id}"][value="${answer}"]`).disabled = false;
+                    document.querySelector(`input[name="${question.id}"][value="${answer}"]`).parentElement.style.color = 'green';
+                });
+            }
         }
     };
 
+// ...
+
+    useEffect(() => {
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
 // ...
 
     useEffect(() => {
@@ -68,6 +82,7 @@ const Quiz = (props) => {
     function handleNext() {
         setPage((prevPage) => prevPage + 1);
     }
+
     function handleChange(event) {
         const {name, value} = event.target;
         setAnswers((prevAnswers) => ({...prevAnswers, [name]: value}));
@@ -82,11 +97,13 @@ const Quiz = (props) => {
     function handleSubmit() {
         setIsQuizFinished(true);
     }
+
     // Render the quiz questions
     return (
         <form>
             {quizData.slice((page - 1), page).map((question) => {
-                return <Question question={question} handleChange={handleChange} handleShowAnswer={handleShowAnswer} handleSubmit={handleSubmit} answers={answers} showAnswer={showAnswer} />
+                return <Question question={question} handleChange={handleChange} handleShowAnswer={handleShowAnswer}
+                                 handleSubmit={handleSubmit} answers={answers} showAnswer={showAnswer} page={page}/>
             })}
             {page > 1 && <button type="button" onClick={handlePrevious}>Previous</button>}
             {page < numPages && <button type="button" onClick={handleNext}>Next</button>}

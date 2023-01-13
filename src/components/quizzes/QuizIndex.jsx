@@ -8,7 +8,7 @@ const QuizIndex = (props) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/devops', { state: { start, end } });
+        navigate(`/devops?start=${start}&end=${end}`, { state: { start, end } });
     }
 
     return (
