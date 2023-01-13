@@ -1,23 +1,30 @@
-// comment.tsx
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from 'react';
 
-export default function Comment() {
-    const commentsEl = useRef<HTMLDivElement>(null);
+const UtterancesComments = () => {
+    const ref = useRef();
 
     useEffect(() => {
-        const scriptEl = document.createElement("script");
-        scriptEl.async = true;
-        scriptEl.src = "https://utteranc.es/client.js";
-        scriptEl.setAttribute("repo", "sundoforce/cbt");
-        scriptEl.setAttribute("issue-term", "pathname");
-        scriptEl.setAttribute("theme", "github-light");
-        scriptEl.setAttribute("crossorigin", "anonymous");
-        commentsEl.current?.appendChild(scriptEl);
+        const script = document.createElement('script');
+
+        const config = {
+            src: 'https://utteranc.es/client.js',
+            repo: 'sundoforce/cbt',
+            'issue-term': 'pathname',
+            theme: 'github-light',
+            crossOrigin: 'anonymous',
+            defer: true
+        };
+
+        Object.entries(config).forEach(([key, value]) => {
+            script.setAttribute(key, value);
+        });
+
+        setTimeout(() => {
+            ref.current.append(script);
+        }, 300);
     }, []);
 
-    return (
-        <div>
-            <div ref={commentsEl} />
-        </div>
-    );
-}
+    return <div ref={ref} />;
+};
+
+export default UtterancesComments;

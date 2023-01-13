@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Question from "../question/Question";
 import { useLocation } from 'react-router-dom';
+import UtterancesComments from "../common/Utterance";
 
 
 const Quiz = (props) => {
@@ -119,8 +120,10 @@ const Quiz = (props) => {
             })}
             {page > 1 && <button type="button" onClick={handlePrevious}>Previous</button>}
             {page < numPages && <button type="button" onClick={handleNext}>Next</button>}
-            {/*<button type="submit">Check answers</button>*/}
+            <UtterancesComments />
 
+
+            {/*<button type="submit">Check answers</button>*/}
         </form>
     );
 
