@@ -1,6 +1,7 @@
 import React from 'react';
 import UtterancesComments from "../common/Utterance";
 import Disqus from "disqus-react";
+import {Helmet} from "react-helmet";
 
 const Question = (props) => {
 
@@ -9,6 +10,10 @@ const Question = (props) => {
 
     return (
         <div  key={question.id}>
+            <Helmet>
+                <title>{question.title}</title>
+                <meta name="description" content={question.title}/>
+            </Helmet>
             <h3>{page}. {question.title}</h3>
             <p>real question number: {question.id}</p>
             {question.passage_a &&
