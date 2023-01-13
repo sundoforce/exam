@@ -1,4 +1,5 @@
 import React from 'react';
+import Comment from "../common/Utterance";
 
 const Question = (props) => {
 
@@ -30,6 +31,7 @@ const Question = (props) => {
             {question.description && <p> {question.description}</p>}
             {question.answer.length > 2 && <p> {question.answer}</p>}
             <button type="button" onClick={() => handleShowAnswer(question.id, question.answer)}>Show answer</button>
+            {/*<Comment/>*/}
         </div>
     );
 };
