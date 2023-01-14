@@ -10,7 +10,7 @@ interface DisqusProps {
 const Disqus = ({identifier, title}: DisqusProps) => {
     console.log(`${identifier}_${process.env.NODE_ENV}`)
     const [config, setConfig] = useState({
-        url: window.location.href,
+        url: window.location.href + window.location.pathname +  {identifier},
         identifier: `${identifier}_${process.env.NODE_ENV}`,
         title: title,
         language: 'ko',

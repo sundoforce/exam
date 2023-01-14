@@ -1,6 +1,6 @@
 import React from 'react';
 import UtterancesComments from "../common/Utterance";
-import Disqus from "disqus-react";
+import Disqus, {DiscussionEmbed} from "disqus-react";
 import {Helmet} from "react-helmet";
 
 const Question = (props) => {
@@ -37,6 +37,8 @@ const Question = (props) => {
             {question.description && <p> {question.description}</p>}
             {question.answer.length > 2 && <p> {question.answer}</p>}
             <button type="button" onClick={() => handleShowAnswer(question.id, question.answer)}>Show answer</button>
+            {/*<UtterancesComments/>*/}
+            {/*<DiscussionEmbed identifier={question.id} title={question.title} />*/}
         </div>
     );
 };
