@@ -50,14 +50,6 @@ const Quiz = (props) => {
             handleNext();
         } else if (event.key === 'ArrowLeft') {
             handlePrevious();
-        } else if (event.key === ' ' || event.key === 'Spacebar') {
-            const { question } = props;
-            if (question && question.answer) {
-                question.answer.split('').forEach((answer) => {
-                    document.querySelector(`input[name="${question.id}"][value="${answer}"]`).disabled = false;
-                    document.querySelector(`input[name="${question.id}"][value="${answer}"]`).parentElement.style.color = 'green';
-                });
-            }
         }
     };
 

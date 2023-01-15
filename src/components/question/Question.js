@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import UtterancesComments from "../common/Utterance";
 import Disqus, {DiscussionEmbed} from "disqus-react";
 import {Helmet} from "react-helmet";
 
 const Question = (props) => {
-
 
     const {question, handleChange, handleShowAnswer, answers,  page , handleNext,handlePrevious } = props;
 
