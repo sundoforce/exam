@@ -143,7 +143,7 @@ const Quiz = (props) => {
         })}
         {page > 1 && <button type="button" onClick={handlePrevious}>Previous</button>}
         {page < numPages && <button type="button" onClick={handleNext}>Next</button>}
-        <Result correctAnswers={correctAnswers} quizData={quizData}/>
+        {/*<Result correctAnswers={correctAnswers} quizData={quizData}/>*/}
         <button type="submit">Check answers</button>
     </form>);
 
